@@ -13,9 +13,9 @@ namespace FinalService.Controllers
     {
         private IDataRepository _dataRepository;
 
-        public BooksController()
+        public BooksController(IDataRepository dataRepository)
         {
-            _dataRepository = new EfDataRepository();
+            _dataRepository = dataRepository;
         }
 
         public IEnumerable<Book> GetAllBooks()
