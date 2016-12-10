@@ -21,7 +21,7 @@ namespace Lab_01_Ian_Gesner.Proxies
 
             //string serviceBaseUrl = ConfigurationManager.AppSettings["DateServiceBaseUrl"];
 
-            _client.BaseAddress = new Uri("http://localhost:23407/api/");
+            _client.BaseAddress = new Uri("http://localhost:20105/api/");
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -31,7 +31,7 @@ namespace Lab_01_Ian_Gesner.Proxies
         {
             List<Book> booksList = new List<Book>();
 
-            HttpResponseMessage response = await _client.GetAsync("Book");
+            HttpResponseMessage response = await _client.GetAsync("Books");
             if (response.IsSuccessStatusCode)
             {
                 booksList = await response.Content.ReadAsAsync<List<Book>>();
@@ -39,28 +39,6 @@ namespace Lab_01_Ian_Gesner.Proxies
             return booksList;
         }
 
-        //static public async Task<IEnumerable<Book>> RunAsync()
-        //{
-        //    _client.BaseAddress = new Uri("http://localhost:23407/api/");
-        //    _client.DefaultRequestHeaders.Accept.Clear();
-        //    _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //    var Books = await GetBooksAsync("Books");
-
-        //    return Books;
-        //}
-
-        //public async Task<IEnumerable<Book>> GetBooksAsync(string path)
-        //{
-
-
-        //    IEnumerable<Book> books = null;
-        //    HttpResponseMessage response = await _client.GetAsync(path);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        books = await response.Content.ReadAsAsync<IEnumerable<Book>>();
-        //    }
-        //    return books;
-        //}
+        //BOOYAH
     }
 }

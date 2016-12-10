@@ -50,3 +50,16 @@
         </tr>
     }
 </table>
+
+<h2>All books added by all users:</h2>
+
+<table class="table">
+    @foreach (string book in (List<string>)ViewBag.AllBooks)
+    {
+        <tr>
+            <td>
+                @book
+            </td>
+        </tr>
+    }
+</table>

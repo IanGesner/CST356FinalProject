@@ -11,12 +11,12 @@ using Microsoft.AspNet.Identity;
 using Lab_01_Ian_Gesner.Data;
 using Lab_01_Ian_Gesner.Proxies;
 using Lab_01_Ian_Gesner.Services;
+using System.Threading.Tasks;
 
 namespace Lab_01_Ian_Gesner.Controllers
 {
     public class BooksController : Controller
     {
-        //private DatabaseContext db = new DatabaseContext();
         private readonly IDataRepository _dataRepository;
         private IBookService _bookService;
         private IBookProxy _bookProxy;
@@ -31,13 +31,21 @@ namespace Lab_01_Ian_Gesner.Controllers
 
 
         // GET: Books
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            List<Book> books = new List<Book>();
+            List<string> bookTitles = new List<string>();
 
-            //var books = await _bookProxy.GetAllBooksAsync();
+            books = await _bookProxy.GetAllBooksAsync();
 
             List<String> usersWithSameBook = _bookService.GetUsersWithSameBooks(User.Identity.GetUserId());
             ViewBag.OtherUsers = usersWithSameBook;
+
+            foreach(Book book in books)
+            {
+                bookTitles.Add(book.Title);
+            }
+            ViewBag.AllBooks = bookTitles;
 
             var user = User.Identity.GetUserId();
 
