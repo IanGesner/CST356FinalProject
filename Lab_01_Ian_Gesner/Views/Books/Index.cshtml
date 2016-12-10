@@ -57,9 +57,32 @@
     @foreach (string book in (List<string>)ViewBag.AllBooks)
     {
         <tr>
-            <td>
+            <td onclick="myFunction()">
                 @book
             </td>
         </tr>
     }
 </table>
+
+@section Scripts {
+
+    <script>
+        //function myFunction() {
+        //    alert("Book created");
+        //}
+
+
+            function myFunction() {
+                alert("This is a book");
+            }
+        //$(document).ready(function () {
+        //    $(".btn1").click(function () {
+        //        $("p").fadeOut()
+        //    });
+        //    $(".btn2").click(function () {
+        //        $("p").fadeIn();
+        //    });
+        //});
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

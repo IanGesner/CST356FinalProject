@@ -42,7 +42,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" onclick="myFunction()" />
             </div>
         </div>
     </div>
@@ -53,5 +53,19 @@
 </div>
 
 @section Scripts {
+
+    <script>
+        //function myFunction() {
+        //    alert("Book created");
+        //}
+        $(document).ready(function () {
+            $(".btn1").click(function () {
+                $("p").fadeOut()
+            });
+            $(".btn2").click(function () {
+                $("p").fadeIn();
+            });
+        });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }
