@@ -134,7 +134,6 @@ namespace Lab_01_Ian_Gesner.Data
             return _databaseContext.Users.Find(id);
         }
 
-
         public void DisposeContext()
         {
             _databaseContext.Dispose();

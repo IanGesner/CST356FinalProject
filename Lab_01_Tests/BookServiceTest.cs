@@ -11,31 +11,37 @@ namespace Lab_01_Tests
     [TestFixture]
     public class BookServiceTest
     {
-        IBookService _bookService;
-        IDataRepository _dataRepository;
-
-        //[SetUp]
-        //public void SetUp()
-        //{
-
-        //}
-
         [TestCase]
         public void GetUsersWithSameBooksTest()
         {
-        //    _bookService = A.Fake<IBookService>();
-        //    _dataRepository = A.Fake<IDataRepository>();
+            var fakeRepository = A.Fake<IDataRepository>();
+            var fakeApplicationUser = A.Fake<ApplicationUser>();
+            List<string> emailsReturned = new List<string>();
+            int numberOfEmailsReturned;
 
-        //    _dataRepository.AddBook(new Book())
+            BookService bookService = new BookService(fakeRepository);
 
-        //    List<String> emails = new List<String>();
-        //    emails.Add("test3@test.com");
-        //    emails.Add("test2@test.com");
+        
+            List<Book> books = new List<Book>
+                    {
+                        new Book(){ BookID = 1, Title = "Not Unique", Id = "1"},
+                        new Book(){ BookID = 2, Title = "Not Unique", Id = "1" },
+                        new Book(){ BookID = 3, Title = "Unique", Id = "2" },
+                        new Book(){ BookID = 4, Title = "Unique 1", Id = "3" },
+                        new Book(){ BookID = 5, Title = "Unique 2", Id = "4" },
+                        new Book(){ BookID = 6, Title = "Unique 3", Id = "5" },
+                    };
 
-        //    A.CallTo(() => _bookService.GetUsersWithSameBooks("1")).Returns(emails);
+            foreach (Book book in books)
+            {
+                fakeRepository.AddBook(book);
+            }
 
-            //I give up
-            Assert.AreEqual(true, true);
+
+            emailsReturned = bookService.GetUsersWithSameBooks("1");
+            numberOfEmailsReturned = emailsReturned.Count;
+
+            Assert.AreEqual(0, numberOfEmailsReturned);
         }
 
     }
