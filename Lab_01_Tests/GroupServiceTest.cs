@@ -1,4 +1,5 @@
-﻿using Lab_01_Ian_Gesner.Models;
+﻿using Lab_01_Ian_Gesner.Data;
+using Lab_01_Ian_Gesner.Models;
 using Lab_01_Ian_Gesner.Services;
 using NUnit.Framework;
 
@@ -7,6 +8,7 @@ namespace Lab_01_Tests
     [TestFixture]
     public class GroupServiceTest
     {
+
         [TestCase]
         public void HasEscalatedPrivilegesTest()
         {

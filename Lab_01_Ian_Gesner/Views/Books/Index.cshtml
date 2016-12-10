@@ -12,9 +12,6 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -26,9 +23,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
@@ -42,5 +36,17 @@
         </td>
     </tr>
 }
+</table>
 
+<h2>Other users that own one of the same books:</h2>
+
+<table class="table">
+    @foreach (string email in (List<string>)ViewBag.OtherUsers)
+    {
+        <tr>
+            <td>
+                @email
+            </td>
+        </tr>
+    }
 </table>

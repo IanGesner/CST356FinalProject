@@ -1,4 +1,5 @@
 ﻿using Lab_01_Ian_Gesner.Data;
+using Lab_01_Ian_Gesner.Proxies;
 using Lab_01_Ian_Gesner.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
@@ -24,6 +25,8 @@ namespace Lab_01_Ian_Gesner.App_Start
                 // Register your types, for instance:
                 container.Register<IDataRepository, EfDataRepository>(Lifestyle.Scoped);
                 container.Register<IGroupService, GroupService>(Lifestyle.Scoped);
+                container.Register<IBookService, BookService>(Lifestyle.Scoped);
+                container.Register<IBookProxy, BookProxy>(Lifestyle.Scoped);
                 //container.Register<ICreditRatingService, CreditRatingService>();
 
                 // This is an extension method from the integration package.

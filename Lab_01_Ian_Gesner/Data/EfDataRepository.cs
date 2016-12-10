@@ -128,6 +128,12 @@ namespace Lab_01_Ian_Gesner.Data
             _databaseContext.SaveChanges();
         }
 
+        //USER
+        public ApplicationUser GetUser(string id)
+        {
+            return _databaseContext.Users.Find(id);
+        }
+
 
         public void DisposeContext()
         {

@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Lab_01_Ian_Gesner.Models;
 using Microsoft.AspNet.Identity;
 using Lab_01_Ian_Gesner.Data;
+using Lab_01_Ian_Gesner.Proxies;
+using Lab_01_Ian_Gesner.Services;
 
 namespace Lab_01_Ian_Gesner.Controllers
 {
@@ -16,20 +18,29 @@ namespace Lab_01_Ian_Gesner.Controllers
     {
         //private DatabaseContext db = new DatabaseContext();
         private readonly IDataRepository _dataRepository;
+        private IBookService _bookService;
+        private IBookProxy _bookProxy;
 
-        public BooksController(IDataRepository dataRepository)
+        public BooksController(IDataRepository dataRepository, IBookService bookService, IBookProxy bookProxy)
         {
             //_dataRepository = new EfDataRepository();
             _dataRepository = dataRepository;
+            _bookService = bookService;
+            _bookProxy = bookProxy;
         }
 
 
         // GET: Books
         public ActionResult Index()
         {
-            //var books = db.Books.Include(b => b.ApplicationUser);
-            //return View(books.ToList());
+
+            //var books = await _bookProxy.GetAllBooksAsync();
+
+            List<String> usersWithSameBook = _bookService.GetUsersWithSameBooks(User.Identity.GetUserId());
+            ViewBag.OtherUsers = usersWithSameBook;
+
             var user = User.Identity.GetUserId();
+
             return View(_dataRepository.GetAllBooks(user));
         }
 
@@ -68,10 +79,10 @@ namespace Lab_01_Ian_Gesner.Controllers
                 //db.SaveChanges();
                 book.Id = User.Identity.GetUserId();
                 _dataRepository.AddBook(book);
+
+                //TODO: get list of books and tell the user which other users also have that book
                 return RedirectToAction("Index");
             }
-
-           // ViewBag.Id = new SelectList(db.ApplicationUsers, "Id", "Email", book.Id);
             return View(book);
         }
 

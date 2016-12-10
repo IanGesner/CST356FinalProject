@@ -39,6 +39,9 @@ namespace Lab_01_Ian_Gesner.Data
         void UpdateMovie(Movie id);
         void RemoveMovie(Movie id);
 
+        //APPLICATION USER
+        ApplicationUser GetUser(string id);
+
         void DisposeContext();
     }
 }
